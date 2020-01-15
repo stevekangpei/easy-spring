@@ -2,22 +2,22 @@ package com.kangpei.aop;
 
 import java.lang.reflect.Method;
 
-public class BeforeAdvice implements Advice {
+public class AfterAdvice implements Advice {
 
     private Object bean;
 
     private MethodInvocation methodInvocation;
 
-    public BeforeAdvice(Object bean, MethodInvocation methodInvocation) {
+    public AfterAdvice(Object bean, MethodInvocation methodInvocation) {
         this.bean = bean;
         this.methodInvocation = methodInvocation;
     }
 
+
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-
+        Object invoke = method.invoke(bean, args);
         methodInvocation.invoke();
-        Object object = method.invoke(bean, args);
-        return object;
+        return invoke;
     }
 }
